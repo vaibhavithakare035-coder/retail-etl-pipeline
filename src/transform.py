@@ -1,11 +1,11 @@
 import pandas as pd
 
 def transform_data(df):
-    print("Starting transfrom step")
+    print("Starting transform step")
     
     df.columns = df.columns.str.lower()
     df.columns = df.columns.str.replace(" ","_")
-    df.columns = df.columns.str.replcae("-","_")
+    df.columns = df.columns.str.replace("-","_")
 
 
     df["order_date"] = pd.to_datetime(df["order_date"],errors="coerce")
