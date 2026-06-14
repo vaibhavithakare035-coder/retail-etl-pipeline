@@ -16,7 +16,8 @@ def main():
 
         cleaned_df = transform_data(df)
 
-        load_data(cleaned_df, output_file_path)
+        if cleaned_df is not None:
+            load_data(cleaned_df, output_file_path)
 
     print("Pipeline completed")
 

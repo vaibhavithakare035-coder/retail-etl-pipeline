@@ -1,18 +1,30 @@
+import logging
 import pandas as pd
 
+
 def transform_data(df):
-    print("Starting transform step")
-    
-    df.columns = df.columns.str.lower()
-    df.columns = df.columns.str.replace(" ","_")
-    df.columns = df.columns.str.replace("-","_")
+    try:
+        logging.info("Starting transform step...")
 
+        # Clean column names
+        df.columns = df.columns.str.lower()
+        df.columns = df.columns.str.replace(" ", "_")
+        df.columns = df.columns.str.replace("-", "_")
 
-    df["order_date"] = pd.to_datetime(df["order_date"],errors="coerce")
-    df["ship_date"] = pd.to_datetime(df["ship_date"],errors="coerce")
+        # Convert date columns
+        df["order_date"] = pd.to_datetime(df["order_date"], errors="coerce")
+        df["ship_date"] = pd.to_datetime(df["ship_date"], errors="coerce")
 
-    df["postal_code"] = df["postal_code"].fillna("Unknown")
+        # Handle missing postal code values
+        df["postal_code"] = df["postal_code"].fillna("Unknown")
 
-    print("Transform step completed successfully")
+        logging.info("Transform step completed successfully.")
+        return df
 
-    return df 
+    except KeyError as e:
+        logging.error(f"Column not found during transform step: {e}")
+        return None
+
+    except Exception as e:
+        logging.error(f"Unexpected error during transform step: {e}")
+        return None
