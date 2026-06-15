@@ -1,6 +1,7 @@
 from extract import extract_data, inspect_data
 from transform import transform_data
 from load import load_data
+from report import generate_summary_report
 
 
 def main():
@@ -8,6 +9,7 @@ def main():
 
     raw_file_path = "data/raw/retail_sales.csv"
     output_file_path = "data/processed/cleaned_retail_sales.csv"
+    summary_report_path = "data/processed/sales_summary_by_region_category.csv"
 
     df = extract_data(raw_file_path)
 
@@ -18,6 +20,7 @@ def main():
 
         if cleaned_df is not None:
             load_data(cleaned_df, output_file_path)
+            generate_summary_report(output_file_path, summary_report_path)
 
     print("Pipeline completed")
 
