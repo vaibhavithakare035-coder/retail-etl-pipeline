@@ -19,6 +19,8 @@ Completed:
   - Cleans column names
   - Converts date columns to datetime format
   - Handles missing postal code values
+  - Creates `delivery_days` column from order date and ship date
+  - Creates `sales_category` column based on sales amount
 
 - Load stage
   - Saves cleaned data into `data/processed/cleaned_retail_sales.csv`
