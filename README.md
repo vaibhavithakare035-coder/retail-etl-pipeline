@@ -25,7 +25,8 @@ Completed:
 
 - Main pipeline runner
   - Runs Extract, Transform, and Load together using `src/main.py`
-  Run Full ETL Pipeline
+
+- Run Full ETL Pipeline
 From the main project folder, run:
 python src/main.py
 This command runs the complete ETL pipeline:
