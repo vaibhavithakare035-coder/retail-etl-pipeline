@@ -1,14 +1,24 @@
 import os
+import logging 
+
 
 def load_data(df,output_path):
-    print("Starting load step... ")
+    try:
+        logging.info("Starting load step...")
+        output_folder = os.path.dirname(output_path)
+       
+        if not os.path.exists(output_folder):
+            os.makedirs(output_folder)
+            logging.info(f"Created output folder:{output_folder}")
 
-    output_folder = os.path.dirname(output_path)
+        df.to_csv(output_path,index=False)
 
-    if not os.path.exists(output_folder):
-        os.makedirs(output_folder)
+        logging.info(f"Cleaned date saved successfully at: {output_path}")
 
-    df.to_csv(output_path,index=False)
+    except Exception as e:
+        logging.error(f"Unexpected error during load step: {e}")
+    
 
-    print(f"Cleaned date saved successfully at: {output_path}")
+
+
     
