@@ -55,6 +55,7 @@ Completed:
 
 ## Project Structure
 
+```text
 retail etl pipeline/
 ├── data/
 │   ├── raw/
@@ -73,6 +74,7 @@ retail etl pipeline/
 ├── .gitignore
 ├── requirements.txt
 └── README.md
+```
 
 ## Dataset
 
