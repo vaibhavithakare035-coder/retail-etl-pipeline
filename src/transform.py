@@ -16,12 +16,22 @@ def transform_data(df):
         df["ship_date"] = pd.to_datetime(df["ship_date"], errors="coerce")
 
         df["delivery_days"] = (df["ship_date"] -df["order_date"]).dt.days
+        
+        invalid_delivery_days = df[df["delivery_days"]<0]
 
+        if len(invalid_delivery_days)>0:
+            logging.warning(f"Found{len(invalid_delivery_days)} rows with negative delivery days.")
+        
         df["sales_category"] = pd.cut(
             df["sales"],
             bins = [0,100,500,float("inf")],
             labels = ["low","medium","high"]        
         )
+
+        negative_sales = df[df["sales"]<0]
+
+        if len(negative_sales)>0:
+            logging.warning(f"Found {len(negative_sales)} rows with negative sales values.")
 
 
         # Handle missing postal code values
