@@ -1,28 +1,23 @@
-from extract import extract_data, inspect_data
-from transform import transform_data
-from load import load_data
-from report import generate_summary_report
+import logging
+from config import PipelineConfig
+from pipeline import RetailETLPipeline
+
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
 
 
 def main():
-    print("Pipeline started")
+    config = PipelineConfig(
+        raw_file_path="data/raw/retail_sales.csv",
+        cleaned_file_path="data/processed/cleaned_retail_sales.csv",
+        summary_report_path="data/processed/sales_summary_by_region_category.csv"
+    )
 
-    raw_file_path = "data/raw/retail_sales.csv"
-    output_file_path = "data/processed/cleaned_retail_sales.csv"
-    summary_report_path = "data/processed/sales_summary_by_region_category.csv"
-
-    df = extract_data(raw_file_path)
-
-    if df is not None:
-        inspect_data(df)
-
-        cleaned_df = transform_data(df)
-
-        if cleaned_df is not None:
-            load_data(cleaned_df, output_file_path)
-            generate_summary_report(output_file_path, summary_report_path)
-
-    print("Pipeline completed")
+    pipeline = RetailETLPipeline(config)
+    pipeline.run()
 
 
 if __name__ == "__main__":
