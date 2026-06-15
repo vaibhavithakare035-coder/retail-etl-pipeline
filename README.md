@@ -6,14 +6,34 @@ The goal of this project is to build an ETL pipeline for retail sales data.
 
 ## Current Progress
 
-Currently completed:
+Completed:
 
 - Extract stage
-- Read raw CSV file using Pandas
-- Validate whether the file exists
-- Handle file reading errors using exception handling
-- Add logging for success and error messages
-- Inspect dataset shape, columns, data types, missing values, and duplicate rows
+  - Reads raw CSV file using Pandas
+  - Validates whether the file exists
+  - Handles file reading errors using exception handling
+  - Adds logging for success and error messages
+  - Inspects dataset shape, columns, data types, missing values, and duplicate rows
+
+- Transform stage
+  - Cleans column names
+  - Converts date columns to datetime format
+  - Handles missing postal code values
+
+- Load stage
+  - Saves cleaned data into `data/processed/cleaned_retail_sales.csv`
+
+- Main pipeline runner
+  - Runs Extract, Transform, and Load together using `src/main.py`
+  Run Full ETL Pipeline
+From the main project folder, run:
+python src/main.py
+This command runs the complete ETL pipeline:
+Extract → Transform → Load
+The cleaned output file will be created at:
+data/processed/cleaned_retail_sales.csv
+
+
 
 ## Project Structure
 
