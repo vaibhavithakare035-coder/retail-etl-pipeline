@@ -36,11 +36,19 @@ Extract → Transform → Load
 The cleaned output file will be created at:
 data/processed/cleaned_retail_sales.csv
 
+- Report generation
+  - Creates a sales summary report by region and category
+  - Saves the report as `data/processed/sales_summary_by_region_category.csv`
+
+  - Output Files
+    After running the pipeline, these files are created locally:
+    ```text
+    data/processed/cleaned_retail_sales.csv
+    data/processed/sales_summary_by_region_category.csv
 
 
 ## Project Structure
 
-```text
 retail etl pipeline/
 ├── data/
 │   ├── raw/
