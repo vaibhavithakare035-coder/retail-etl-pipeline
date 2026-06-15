@@ -15,6 +15,15 @@ def transform_data(df):
         df["order_date"] = pd.to_datetime(df["order_date"], errors="coerce")
         df["ship_date"] = pd.to_datetime(df["ship_date"], errors="coerce")
 
+        df["delivery_days"] = (df["ship_date"] -df["order_date"]).dt.days
+
+        df["sales_category"] = pd.cut(
+            df["sales"],
+            bins = [0,100,500,float("inf")],
+            labels = ["low","medium","high"]        
+        )
+
+
         # Handle missing postal code values
         df["postal_code"] = df["postal_code"].fillna("Unknown")
 
@@ -28,3 +37,4 @@ def transform_data(df):
     except Exception as e:
         logging.error(f"Unexpected error during transform step: {e}")
         return None
+    
